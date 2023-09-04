@@ -8,6 +8,7 @@ public class SfgRecipeAppApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SfgRecipeAppApplication.class, args);
+		
 	}
 
 }
