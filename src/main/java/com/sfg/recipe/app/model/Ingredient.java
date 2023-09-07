@@ -3,10 +3,12 @@ package com.sfg.recipe.app.model;
 import java.math.BigDecimal;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Ingredient {
@@ -18,6 +20,8 @@ public class Ingredient {
 	private BigDecimal amount;
 	@ManyToOne
 	private Recipe recipe;
+	@OneToOne(fetch = FetchType.EAGER)
+	private UnitOfMeasure uom;
 
 	public Long getId() {
 		return id;
@@ -49,6 +53,14 @@ public class Ingredient {
 
 	public void setRecipe(Recipe recipe) {
 		this.recipe = recipe;
+	}
+
+	public UnitOfMeasure getUom() {
+		return uom;
+	}
+
+	public void setUom(UnitOfMeasure uom) {
+		this.uom = uom;
 	}
 
 }
