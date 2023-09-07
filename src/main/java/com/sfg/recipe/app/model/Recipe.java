@@ -4,6 +4,8 @@ import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -30,6 +32,8 @@ public class Recipe {
 	private Notes notes;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
 	private Set<Ingredient> ingredients;
+	@Enumerated(value = EnumType.STRING)
+	private Dificulty dificulty;
 
 	public Long getId() {
 		return id;
@@ -109,6 +113,22 @@ public class Recipe {
 
 	public void setNotes(Notes notes) {
 		this.notes = notes;
+	}
+
+	public Set<Ingredient> getIngredients() {
+		return ingredients;
+	}
+
+	public void setIngredients(Set<Ingredient> ingredients) {
+		this.ingredients = ingredients;
+	}
+
+	public Dificulty getDificulty() {
+		return dificulty;
+	}
+
+	public void setDificulty(Dificulty dificulty) {
+		this.dificulty = dificulty;
 	}
 
 }
