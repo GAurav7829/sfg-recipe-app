@@ -1,11 +1,14 @@
 package com.sfg.recipe.app.model;
 
+import java.util.Set;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -25,6 +28,8 @@ public class Recipe {
 	private Byte[] image;
 	@OneToOne(cascade = CascadeType.ALL)
 	private Notes notes;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+	private Set<Ingredient> ingredients;
 
 	public Long getId() {
 		return id;
