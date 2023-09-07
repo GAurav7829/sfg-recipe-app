@@ -1,5 +1,6 @@
 package com.sfg.recipe.app.model;
 
+
 import java.math.BigDecimal;
 
 import jakarta.persistence.Entity;
@@ -13,54 +14,65 @@ import jakarta.persistence.OneToOne;
 @Entity
 public class Ingredient {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	private String description;
-	private BigDecimal amount;
-	@ManyToOne
-	private Recipe recipe;
-	@OneToOne(fetch = FetchType.EAGER)
-	private UnitOfMeasure uom;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String description;
+    private BigDecimal amount;
 
-	public Long getId() {
-		return id;
-	}
+    @OneToOne(fetch = FetchType.EAGER)
+    private UnitOfMeasure uom;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @ManyToOne
+    private Recipe recipe;
 
-	public String getDescription() {
-		return description;
-	}
+    public Ingredient() {
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom, Recipe recipe) {
+        this.description = description;
+        this.amount = amount;
+        this.uom = uom;
+        this.recipe = recipe;
+    }
 
-	public BigDecimal getAmount() {
-		return amount;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setAmount(BigDecimal amount) {
-		this.amount = amount;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public Recipe getRecipe() {
-		return recipe;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setRecipe(Recipe recipe) {
-		this.recipe = recipe;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public UnitOfMeasure getUom() {
-		return uom;
-	}
+    public BigDecimal getAmount() {
+        return amount;
+    }
 
-	public void setUom(UnitOfMeasure uom) {
-		this.uom = uom;
-	}
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
 
+    public Recipe getRecipe() {
+        return recipe;
+    }
+
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
+    }
+
+    public UnitOfMeasure getUom() {
+        return uom;
+    }
+
+    public void setUom(UnitOfMeasure uom) {
+        this.uom = uom;
+    }
 }
