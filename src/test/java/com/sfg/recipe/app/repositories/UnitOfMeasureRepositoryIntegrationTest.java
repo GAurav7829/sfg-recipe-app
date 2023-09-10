@@ -28,4 +28,10 @@ public class UnitOfMeasureRepositoryIntegrationTest {
 		assertEquals("Teaspoon", findByDescription.get().getDescription());
 	}
 	
+	@Test
+	public void findByDescriptionCup() {
+		Optional<UnitOfMeasure> findByDescription = unitOfMeasureRepository.findByDescription("Cup");
+		assertEquals("Cup", findByDescription.get().getDescription());
+	}
+	
 }
