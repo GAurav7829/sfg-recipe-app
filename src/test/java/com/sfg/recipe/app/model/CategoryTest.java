@@ -1,15 +1,15 @@
 package com.sfg.recipe.app.model;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class CategoryTest {
 	
 	Category category;
 	
-	@Before
+	@BeforeEach
 	public void setUp() {
 		category = new Category();
 	}
