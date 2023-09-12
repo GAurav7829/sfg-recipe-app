@@ -8,5 +8,6 @@ import com.sfg.recipe.app.model.Recipe;
 
 @Service
 public interface RecipeService {
-	public Set<Recipe> getRecipies();
+	Set<Recipe> getRecipies();
+	Recipe findById(Long id);
 }

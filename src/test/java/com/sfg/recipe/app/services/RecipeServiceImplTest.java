@@ -1,6 +1,8 @@
 package com.sfg.recipe.app.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -41,5 +43,21 @@ public class RecipeServiceImplTest {
 		assertEquals(recipes.size(), 1);
 		verify(recipeRepository, times(1)).findAll();
 	}
+	
+	@Test
+    public void getRecipesTest() throws Exception {
+
+        Recipe recipe = new Recipe();
+        HashSet receipesData = new HashSet();
+        receipesData.add(recipe);
+
+        when(recipeService.getRecipies()).thenReturn(receipesData);
+
+        Set<Recipe> recipes = recipeService.getRecipies();
+
+        assertEquals(recipes.size(), 1);
+        verify(recipeRepository, times(1)).findAll();
+        verify(recipeRepository, never()).findById(anyLong());
+    }
 
 }
