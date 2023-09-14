@@ -48,7 +48,7 @@
 									<!--/*@thymesVar id="recipe" type="com.sfg.recipe.app.model.Recipe"*/-->
 									<td th:text="${recipe.id}">334</td>
 									<td th:text="${recipe.description}">Tasty Goodnees 3</td>
-									<td><a th:href="@{'/recipe/show/'+${recipe.id}}">View</a></td>
+									<td><a th:href="@{'/recipe/'+${recipe.id}+'/show'}">View</a></td>
 									<td><a th:href="@{'/recipe/'+${recipe.id}+'/update'}">Update</a></td>
 									<td><a th:href="@{'/recipe/'+${recipe.id}+'/delete'}">Delete</a></td>
 								</tr>
