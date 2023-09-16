@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sfg.recipe.app.commands.RecipeCommand;
 import com.sfg.recipe.app.converters.RecipeCommandToRecipe;
 import com.sfg.recipe.app.converters.RecipeToRecipeCommand;
+import com.sfg.recipe.app.exceptions.NotFoundException;
 import com.sfg.recipe.app.model.Recipe;
 import com.sfg.recipe.app.repositories.RecipeRepository;
 
@@ -43,7 +44,7 @@ public class RecipeServiceImpl implements RecipeService {
 	public Recipe findById(Long id) {
 		Optional<Recipe> optionalRecipe = recipeRepository.findById(id);
 		if (!optionalRecipe.isPresent())
-			throw new RuntimeException("Recipe not found");
+			throw new NotFoundException("Recipe not found");
 		return optionalRecipe.get();
 	}
 
