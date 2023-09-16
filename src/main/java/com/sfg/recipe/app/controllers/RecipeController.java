@@ -1,6 +1,5 @@
 package com.sfg.recipe.app.controllers;
 
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 import org.springframework.stereotype.Controller;
@@ -67,17 +66,6 @@ public class RecipeController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("error");
 		modelAndView.addObject("exceptionType", "404 Not Found!!!");
-		modelAndView.addObject("exception", exception.getMessage());
-		return modelAndView;
-	}
-	
-	@ResponseStatus(BAD_REQUEST)
-	@ExceptionHandler(NumberFormatException.class)
-	public ModelAndView handleNumberFormat(Exception exception) {
-		log.debug("handling number format exception");
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("error");
-		modelAndView.addObject("exceptionType", "400 Bad Request!!!");
 		modelAndView.addObject("exception", exception.getMessage());
 		return modelAndView;
 	}
