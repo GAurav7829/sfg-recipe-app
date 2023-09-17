@@ -1,43 +1,48 @@
-# Java Maven CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-java/ for more details
-#
-version: 2
+version: 2.1
+
+executors:
+  default:
+    docker:
+      - image: circleci/openjdk:17-jdk  # Use JDK 17 image
+
 jobs:
-    build:
-        docker:
-        # specify the version you desire here
-        - image: circleci/openjdk:17-jdk
+  build:
+    executor: default
+    steps:
+      - checkout  # Checkout your code
 
-        # Specify service dependencies here if necessary
-        # CircleCI maintains a library of pre-built images
-        # documented at https://circleci.com/docs/2.0/circleci-images/
-        # - image: circleci/postgres:9.4
+      - run:
+          name: Set up Java environment
+          command: echo 'export JAVA_HOME=/usr/lib/jvm/zulu-17-amd64' >> $BASH_ENV
 
-        working_directory: ~/repo
+      - run:
+          name: Build and Test Spring Boot Project
+          command: |
+            ./mvnw clean install -DskipTests=false
 
-        environment:
-            # Customize the JVM maximum heap limit
-            MAVEN_OPTS: -Xmx3200m
+      - save_cache:
+          key: spring-boot-cache-{{ checksum "pom.xml" }}
+          paths:
+            - ~/.m2/repository
 
-        steps:
-        - checkout
+      - persist_to_workspace:
+          root: /app
+          paths:
+            - target/
 
-        # Download and cache dependencies
-        - restore_cache:
-              keys:
-              - v1-dependencies-{{ checksum "pom.xml" }}
-              # fallback to using the latest cache if no exact match is found
-              - v1-dependencies-
+  deploy:
+    executor: default
+    steps:
+      - attach_workspace:
+          at: /app
 
-        - run: mvn install -DskipTests
+      # Add deployment steps here if needed
 
-        - run: mvn dependency:go-offline
-
-        - save_cache:
-              paths:
-              - ~/.m2
-              key: v1-dependencies-{{ checksum "pom.xml" }}
-
-        # run tests!
-        - run: mvn integration-test
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
